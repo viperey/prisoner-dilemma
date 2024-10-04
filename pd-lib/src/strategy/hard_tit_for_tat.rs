@@ -1,72 +1,60 @@
-use crate::history::History;
-use crate::prisoner::Move;
-use crate::strategy::{PrisonerStrategy, Strategy, StrategyHardTitForTat};
+use crate::domain::Move;
+use crate::game_result::PartialGameResult;
+use crate::strategy::{ StrategyTrait};
 
-impl Strategy for StrategyHardTitForTat {
-    fn decide(&self, history: &History) -> Move {
+pub struct StrategyHardTitForTat;
+impl StrategyTrait for StrategyHardTitForTat {
+    fn decide(history: &PartialGameResult) -> Move {
         let total_rounds = history.rounds.len();
         if total_rounds < 2 {
             return Move::Cooperate;
         }
         let last_two_moves = &history.rounds[total_rounds.saturating_sub(2)..];
-        if last_two_moves.iter().any(|round| round.their_move == Move::Deflect) {
-            Move::Deflect
+        if last_two_moves
+            .iter()
+            .any(|round| round.their_move() == Move::Defect)
+        {
+            Move::Defect
         } else {
             Move::Cooperate
         }
-    }
-
-    fn name(&self) -> PrisonerStrategy {
-        PrisonerStrategy::HardTitForTat
-    }
-
-    fn description(&self) -> String {
-        "Cooperates first two moves, then defects if the opponent defected in either of the last two moves.".to_string()
-    }
-
-    fn nicesness_score(&self) -> f64 {
-        1.0
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::history::History;
+    use crate::game_result::PartialGameResult;
     use crate::round::Round;
 
     #[test]
     fn hard_tit_for_tat_cooperates_first_two_moves() {
-        let strategy = StrategyHardTitForTat;
-        let mut history = History::new();
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        let mut history = PartialGameResult::new();
+        assert_eq!(StrategyHardTitForTat::decide(&history), Move::Cooperate);
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        assert_eq!(StrategyHardTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
     fn hard_tit_for_tat_cooperates_after_recent_defect() {
-        let strategy = StrategyHardTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        let mut history = PartialGameResult::new();
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        assert_eq!(StrategyHardTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
     fn hard_tit_for_tat_betrays_if_any_of_last_two_moves_was_defect() {
-        let strategy = StrategyHardTitForTat;
-        let mut history = History::new();
+        let mut history = PartialGameResult::new();
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
-        assert_eq!(strategy.decide(&history), Move::Deflect);
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        assert_eq!(StrategyHardTitForTat::decide(&history), Move::Defect);
     }
 
     #[test]
     fn hard_tit_for_tat_cooperates_if_no_recent_defection() {
-        let strategy = StrategyHardTitForTat;
-        let mut history = History::new();
+        let mut history = PartialGameResult::new();
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        assert_eq!(StrategyHardTitForTat::decide(&history), Move::Cooperate);
     }
 }

@@ -1,45 +1,33 @@
+use crate::domain::Move;
+use crate::game_result::PartialGameResult;
+use crate::strategy::{StrategyTrait};
 use rand::Rng;
-use crate::history::History;
-use crate::prisoner::Move;
-use crate::strategy::{PrisonerStrategy, Strategy, StrategyAlmostAlwaysCooperate, StrategyAlmostAlwaysDeflect};
 
-impl Strategy for StrategyAlmostAlwaysDeflect {
-    fn decide(&self, _: &History) -> Move {
+pub struct StrategyAlmostAlwaysDefect;
+impl StrategyTrait for StrategyAlmostAlwaysDefect {
+    fn decide(_: &PartialGameResult) -> Move {
         let mut rng = rand::thread_rng();
         let is_cooperate: bool = rng.gen_bool(0.1);
         match is_cooperate {
             true => Move::Cooperate,
-            false => Move::Deflect,
+            false => Move::Defect,
         }
-    }
-
-    fn name(&self) -> PrisonerStrategy {
-        PrisonerStrategy::AlmostAlwaysDefect
-    }
-
-    fn description(&self) -> String {
-        "Always cooperate, but make a mistake 10% of the time.".to_string()
-    }
-
-    fn nicesness_score(&self) -> f64 {
-        1.0
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::history::History;
+    use crate::game_result::PartialGameResult;
 
     #[test]
-    fn almost_always_deflect_probability_check() {
-        let strategy = StrategyAlmostAlwaysDeflect;
-        let history = History::new();
+    fn almost_always_cooperate_probability_check() {
+        let history = PartialGameResult::new();
         let mut cooperate_count = 0;
         let trials = 100_000;
 
         for _ in 0..trials {
-            if strategy.decide(&history) == Move::Cooperate {
+            if StrategyAlmostAlwaysDefect::decide(&history) == Move::Cooperate {
                 cooperate_count += 1;
             }
         }

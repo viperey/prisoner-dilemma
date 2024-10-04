@@ -6,12 +6,19 @@ Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
 
 ## TODO
 
+- [ ] StrategyGradual (fix)
+- [ ] Iterate the code to make it more Rust idiomatic
+- [ ] Fix gradual
+- [ ] Moar strategies
+- [ ] Population
+- [ ] Decay of strategies
 - [ ] Add every known strategies
 - [ ] Test every the strategy individually
 - [ ] Make a GUI
 
 ## Pending Strategies
 
+- https://github.com/Axelrod-Python/Axelrod/blob/dev/axelrod/strategies/_strategies.py
 - **mem2**: Complex strategy shifting between all_d, tit_for_tat, and tf2t based on recent outcomes and pays attention to memory, adjusting strategy accordingly.
 - Probability p Cooperator - Unlikely: Not directly represented
 - Suspicious Tit for Tat (STFT)

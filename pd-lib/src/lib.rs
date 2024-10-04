@@ -1,81 +1,81 @@
-mod strategy;
-mod history;
+mod domain;
 mod game;
-mod round;
+mod game_result;
+mod r#match;
 mod prisoner;
+mod round;
+mod strategy;
+// Tournament > Match > Game > Round
 
 #[cfg(test)]
 mod tests {
-    use crate::game::Game;
-    use crate::prisoner::Prisoner;
-    use crate::strategy::PrisonerStrategy;
+    use crate::domain::{Prisoner, StrategyName};
+    use crate::prisoner::PrisonerBuilder;
+    use crate::r#match::{MatchHandler, MatchResult, MatchSettings};
+    use log::debug;
     use std::collections::HashMap;
 
     #[test]
-    fn test_tournament() {
-        // Tournament > Match > Game > Round
-        let strategies = vec![
-            PrisonerStrategy::TitForTat,
-            PrisonerStrategy::AlwaysCooperate,
-            PrisonerStrategy::AlwaysDefect,
-            PrisonerStrategy::Alternate,
-            PrisonerStrategy::Appease,
-            PrisonerStrategy::Random,
-            PrisonerStrategy::CopyAverage,
-            PrisonerStrategy::Pavlovian,
-            PrisonerStrategy::TitForTwoTats,
-            PrisonerStrategy::TwoTitsForTat,
-            PrisonerStrategy::GrimTrigger,
-            PrisonerStrategy::SoftMajo,
-            PrisonerStrategy::HardMajo,
-            PrisonerStrategy::PerDDC,
-            PrisonerStrategy::PerCCB,
-            PrisonerStrategy::Mistrust,
-            PrisonerStrategy::HardTitForTat,
-            PrisonerStrategy::SlowTitForTat,
-            PrisonerStrategy::Gradual,
-            PrisonerStrategy::Prober,
-            PrisonerStrategy::AlmostAlwaysCooperate,
-            PrisonerStrategy::AlmostAlwaysDefect,
-            PrisonerStrategy::GenerousTitForTat,
+    fn test_match() {
+        env_logger::init();
+        let match_settings = MatchSettings {
+            num_games: 10,
+            num_rounds: 200,
+        };
+        let all_prisoners: Vec<Prisoner> = vec![
+            PrisonerBuilder::almost_always_cooperate(),
+            PrisonerBuilder::almost_always_defect(),
+            PrisonerBuilder::always_alternate(),
+            PrisonerBuilder::always_cooperate(),
+            PrisonerBuilder::always_defect(),
+            PrisonerBuilder::appease(),
+            PrisonerBuilder::copy_average(),
+            PrisonerBuilder::generous_tit_for_tat(),
+            PrisonerBuilder::gradual(),
+            PrisonerBuilder::grim_trigger(),
+            PrisonerBuilder::hard_majo(),
+            PrisonerBuilder::hard_tit_for_tat(),
+            PrisonerBuilder::mistrust(),
+            PrisonerBuilder::pavlovian(),
+            PrisonerBuilder::per_ccb(),
+            PrisonerBuilder::per_ddc(),
+            PrisonerBuilder::prober(),
+            PrisonerBuilder::random(),
+            PrisonerBuilder::slow_tit_for_tat(),
+            PrisonerBuilder::soft_majo(),
+            PrisonerBuilder::tit_for_two_tats(),
+            PrisonerBuilder::tit_for_tat(),
+            PrisonerBuilder::two_tits_for_tat(),
         ];
 
-        let num_games_per_match = 5;
-        let num_rounds_per_game = 200;
+        let mut tournament_scores: HashMap<StrategyName, usize> = HashMap::new();
 
-        let mut tournament_scores: HashMap<&PrisonerStrategy, usize> = HashMap::new();
-
-        for strategy in &strategies {
-            tournament_scores.insert(&strategy, 0);
+        for prisoner in &all_prisoners {
+            let x: StrategyName = prisoner.strategy.clone();
+            tournament_scores.insert(x, 0);
         }
 
-       for (i, strategy_a) in strategies.iter().enumerate() {
-           for strategy_b in strategies.iter().skip(i ) {
-               // println!("Matching {:#?} vs {:#?}", &strategy_a, &strategy_b);
-                for _ in 0..num_games_per_match {
-                    let mut game = Game::new(
-                        Prisoner::new(strategy_a.clone()),
-                        Prisoner::new(strategy_b.clone()),
-                    );
-
-                    game.play(num_rounds_per_game);
-
-                    let points_a = game.history.get_prisoner_a_points();
-                    let points_b = game.history.get_prisoner_b_points();
-                    // println!("Match result: {:?}={:?} vs {:?}={:?}", strategy_a, points_a, strategy_b, points_b);
-
-                    *tournament_scores.get_mut(strategy_a).unwrap() += points_a;
-                    *tournament_scores.get_mut(strategy_b).unwrap() += points_b;
-                }
+        for (i, prisoner_a) in all_prisoners.iter().enumerate() {
+            for prisoner_b in all_prisoners.iter().skip(i) {
+                let match_result: MatchResult =
+                    MatchHandler::play(&match_settings, prisoner_a, prisoner_b);
+                let (points_a, points_b) = MatchHandler::get_score(&match_result);
+                debug!(
+                    "Match result: {:#?}={:#?} vs {:#?}={:#?}",
+                    prisoner_a, points_a, prisoner_b, points_b
+                );
+                *tournament_scores.get_mut(&prisoner_a.strategy).unwrap() += points_a;
+                *tournament_scores.get_mut(&prisoner_b.strategy).unwrap() += points_b;
             }
         }
 
         let mut ranking: Vec<_> = tournament_scores.iter().collect();
         ranking.sort_by(|a, b| b.1.cmp(a.1));
 
-        println!("Strategy Rankings:");
+        debug!("Strategy Rankings:");
         for (strategy, score) in ranking {
-            println!("{:?}: {} points", strategy, score);
+            debug!("{:#?}: {} points", strategy, score);
+            println!("{:#?}: {} points", strategy, score);
         }
     }
 }

@@ -1,88 +1,84 @@
-mod tit_for_tat;
-mod random;
+mod almost_always_cooperate;
+mod almost_always_defect;
+mod always_alternate;
 mod always_cooperate;
 mod always_defect;
-mod always_alternate;
 mod appease;
-mod two_tits_for_tat;
-mod tit_for_two_tats;
-mod pavlovian;
-mod grim_trigger;
 mod copy_average;
-mod soft_majo;
-mod hard_majo;
-mod per_ddc;
-mod per_ccb;
-mod mistrust;
-mod hard_tit_for_tat;
-mod slow_tit_for_tat;
-mod gradual;
-mod prober;
-mod almost_always_cooperate;
-mod almost_always_deflect;
 mod generous_tit_for_tat;
+mod gradual;
+mod grim_trigger;
+mod hard_majo;
+mod hard_tit_for_tat;
+mod mistrust;
+mod pavlovian;
+mod per_ccd;
+mod per_ddc;
+mod prober;
+mod random;
+mod slow_tit_for_tat;
+mod soft_majo;
+mod tit_for_tat;
+mod tit_for_two_tats;
+mod two_tits_for_tat;
 
-use crate::prisoner::Move;
-use crate::history::History;
+use crate::domain::{Move, Prisoner, StrategyName};
+use crate::game_result::PartialGameResult;
+use crate::strategy::almost_always_cooperate::StrategyAlmostAlwaysCooperate;
+use crate::strategy::almost_always_defect::StrategyAlmostAlwaysDefect;
+use crate::strategy::generous_tit_for_tat::StrategyGenerousTitForTat;
+use crate::strategy::random::StrategyRandom;
+use crate::strategy::tit_for_tat::StrategyTitForTat;
+use crate::strategy::always_alternate::StrategyAlternate;
+use crate::strategy::always_cooperate::StrategyAlwaysCooperate;
+use crate::strategy::always_defect::StrategyAlwaysDefect;
+use crate::strategy::appease::StrategyAppease;
+use crate::strategy::copy_average::StrategyCopyAverage;
+use crate::strategy::gradual::StrategyGradual;
+use crate::strategy::grim_trigger::StrategyGrimTrigger;
+use crate::strategy::hard_majo::StrategyHardMajo;
+use crate::strategy::hard_tit_for_tat::StrategyHardTitForTat;
+use crate::strategy::mistrust::StrategyMistrust;
+use crate::strategy::pavlovian::StrategyPavlovian;
+use crate::strategy::per_ccd::StrategyPerCCD;
+use crate::strategy::per_ddc::StrategyPerDDC;
+use crate::strategy::prober::StrategyProber;
+use crate::strategy::slow_tit_for_tat::StrategySlowTitForTat;
+use crate::strategy::soft_majo::StrategySoftMajo;
+use crate::strategy::tit_for_two_tats::StrategyTitForTwoTats;
+use crate::strategy::two_tits_for_tat::StrategyTwoTitsForTat;
 
-#[derive(Debug, Clone, Eq, Hash, PartialEq)]
-pub enum PrisonerStrategy {
-    Random,
-    TitForTat,
-    AlwaysCooperate,
-    AlwaysDefect,
-    Alternate,
-    Appease,
-    CopyAverage,
-    GrimTrigger,
-    Pavlovian,
-    TitForTwoTats,
-    TwoTitsForTat,
-    SoftMajo,
-    HardMajo,
-    PerDDC,
-    PerCCB,
-    Mistrust,
-    HardTitForTat,
-    SlowTitForTat,
-    Gradual,
-    Prober,
-    AlmostAlwaysCooperate,
-    AlmostAlwaysDefect,
-    GenerousTitForTat,
+pub trait StrategyTrait {
+    fn decide(history: &PartialGameResult) -> Move;
 }
 
-
-pub trait Strategy {
-    fn decide(&self, history: &History) -> Move;
-    fn name(&self) -> PrisonerStrategy;
-    fn description(&self) -> String;
-    fn nicesness_score(&self) -> f64;
+pub struct StrategyFacade;
+impl StrategyFacade {
+    pub(crate) fn decide(prisoner_v2: &Prisoner, history: &PartialGameResult) -> Move {
+        match prisoner_v2.strategy {
+            StrategyName::AlmostAlwaysCooperate => StrategyAlmostAlwaysCooperate::decide(history),
+            StrategyName::AlmostAlwaysDefect => StrategyAlmostAlwaysDefect::decide(history),
+            StrategyName::Alternate => StrategyAlternate::decide(history),
+            StrategyName::AlwaysCooperate => StrategyAlwaysCooperate::decide(history),
+            StrategyName::AlwaysDefect => StrategyAlwaysDefect::decide(history),
+            StrategyName::Appease => StrategyAppease::decide(history),
+            StrategyName::CopyAverage => StrategyCopyAverage::decide(history),
+            StrategyName::GenerousTitForTat => StrategyGenerousTitForTat::decide(history),
+            StrategyName::Gradual => StrategyGradual::decide(history),
+            StrategyName::GrimTrigger => StrategyGrimTrigger::decide(history),
+            StrategyName::HardMajo => StrategyHardMajo::decide(history),
+            StrategyName::HardTitForTat => StrategyHardTitForTat::decide(history),
+            StrategyName::Mistrust => StrategyMistrust::decide(history),
+            StrategyName::Pavlovian => StrategyPavlovian::decide(history),
+            StrategyName::PerCCB => StrategyPerCCD::decide(history),
+            StrategyName::PerDDC => StrategyPerDDC::decide(history),
+            StrategyName::Prober => StrategyProber::decide(history),
+            StrategyName::Random => StrategyRandom::decide(history),
+            StrategyName::SlowTitForTat => StrategySlowTitForTat::decide(history),
+            StrategyName::SoftMajo => StrategySoftMajo::decide(history),
+            StrategyName::TitForTat => StrategyTitForTat::decide(history),
+            StrategyName::TitForTwoTats => StrategyTitForTwoTats::decide(history),
+            StrategyName::TwoTitsForTat => StrategyTwoTitsForTat::decide(history),
+        }
+    }
 }
-
-pub struct StrategyTitForTat;
-pub struct StrategyRandom;
-pub struct StrategyAlwaysCooperate;
-pub struct StrategyAlwaysDefect;
-pub struct StrategyAlternate;
-pub struct StrategyAppease;
-pub struct StrategyCopyAverage;
-pub struct StrategyGrimTrigger;
-pub struct StrategyPavlovian;
-pub struct StrategyTitForTwoTats;
-pub struct StrategyTwoTitsForTat;
-pub struct StrategySoftMajo;
-pub struct StrategyHardMajo;
-pub struct StrategyPerDDC;
-pub struct StrategyPerCCD;
-pub struct StrategyMistrust;
-pub struct StrategyHardTitForTat;
-pub struct StrategySlowTitForTat;
-pub struct StrategyProber;
-pub struct StrategyGradual {
-    defect_counter: usize,
-}
-pub struct StrategyAlmostAlwaysCooperate;
-pub struct StrategyAlmostAlwaysDeflect;
-pub struct StrategyGenerousTitForTat;
-

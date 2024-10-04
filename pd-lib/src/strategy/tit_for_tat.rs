@@ -1,62 +1,48 @@
-use crate::history::History;
-use crate::prisoner::Move;
-use crate::strategy::{PrisonerStrategy, Strategy, StrategyTitForTat};
+use crate::domain::Move;
+use crate::game_result::PartialGameResult;
+use crate::strategy::{StrategyTrait};
 
-impl Strategy for StrategyTitForTat {
-    fn decide(&self, history: &History) -> Move {
-        history.last_round()
-            .map(|last_round| last_round.their_move.clone())
+pub struct StrategyTitForTat;
+impl StrategyTrait for StrategyTitForTat {
+    fn decide(history: &PartialGameResult) -> Move {
+        history
+            .last_round()
+            .map(|last_round| last_round.their_move())
             .unwrap_or(Move::Cooperate)
-    }
-
-    fn name(&self) -> PrisonerStrategy {
-        PrisonerStrategy::TitForTat
-    }
-
-    fn description(&self) -> String {
-        "Start by cooperating, then copy the other player\'s moves.".to_string()
-    }
-
-    fn nicesness_score(&self) -> f64 {
-        1.0
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::history::History;
+    use crate::game_result::PartialGameResult;
     use crate::round::Round;
 
     #[test]
     fn tit_for_tat_cooperates_first() {
-        let strategy = StrategyTitForTat;
-        let history = History::new();
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        let history = PartialGameResult::new();
+        assert_eq!(StrategyTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
     fn tit_for_tat_mimics_opponent_cooperate() {
-        let strategy = StrategyTitForTat;
-        let mut history = History::new();
+        let mut history = PartialGameResult::new();
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        assert_eq!(StrategyTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
-    fn tit_for_tat_mimics_opponent_deflect() {
-        let strategy = StrategyTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
-        assert_eq!(strategy.decide(&history), Move::Deflect);
+    fn tit_for_tat_mimics_opponent_defect() {
+        let mut history = PartialGameResult::new();
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        assert_eq!(StrategyTitForTat::decide(&history), Move::Defect);
     }
 
     #[test]
     fn tit_for_tat_continues_mimicry() {
-        let strategy = StrategyTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
-        history.add_round(Round::new(Move::Deflect, Move::Cooperate));
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        let mut history = PartialGameResult::new();
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        history.add_round(Round::new(Move::Defect, Move::Cooperate));
+        assert_eq!(StrategyTitForTat::decide(&history), Move::Cooperate);
     }
 }

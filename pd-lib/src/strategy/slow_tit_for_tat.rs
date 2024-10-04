@@ -1,85 +1,71 @@
-use crate::history::History;
-use crate::prisoner::Move;
-use crate::strategy::{PrisonerStrategy, Strategy, StrategySlowTitForTat};
+use crate::domain::Move;
+use crate::game_result::PartialGameResult;
+use crate::strategy::{ StrategyTrait};
 
-impl Strategy for StrategySlowTitForTat {
-    fn decide(&self, history: &History) -> Move {
+pub struct StrategySlowTitForTat;
+impl StrategyTrait for StrategySlowTitForTat {
+    fn decide(history: &PartialGameResult) -> Move {
         let total_rounds = history.rounds.len();
         if total_rounds < 2 {
             return Move::Cooperate;
         }
         let last_two_moves = &history.rounds[total_rounds.saturating_sub(2)..];
-        if last_two_moves.iter().all(|round| round.their_move == Move::Deflect) {
-            Move::Deflect
-        } else if last_two_moves.iter().all(|round| round.their_move == Move::Cooperate) {
+        if last_two_moves
+            .iter()
+            .all(|round| round.their_move() == Move::Defect)
+        {
+            Move::Defect
+        } else if last_two_moves
+            .iter()
+            .all(|round| round.their_move() == Move::Cooperate)
+        {
             Move::Cooperate
         } else {
-            history.last_round().unwrap().their_move.clone()
+            history.last_round().unwrap().their_move()
         }
-    }
-
-    fn name(&self) -> PrisonerStrategy {
-        PrisonerStrategy::SlowTitForTat
-    }
-
-    fn description(&self) -> String {
-        "Cooperates first two moves, then defects after two consecutive opponent defections and cooperates after two consecutive cooperations.".to_string()
-    }
-
-    fn nicesness_score(&self) -> f64 {
-        1.0
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::history::History;
+    use crate::game_result::PartialGameResult;
     use crate::round::Round;
 
     #[test]
     fn slow_tit_for_tat_cooperates_first_two_moves() {
-        let strategy = StrategySlowTitForTat;
-        let mut history = History::new();
+        let mut history = PartialGameResult::new();
 
-        // First move should be Cooperate
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        assert_eq!(StrategySlowTitForTat::decide(&history), Move::Cooperate);
 
         history.add_round(Round::new(Move::Cooperate, Move::Cooperate));
-        // Second move should also be Cooperate
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        assert_eq!(StrategySlowTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
     fn slow_tit_for_tat_defects_after_double_defection() {
-        let strategy = StrategySlowTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
+        let mut history = PartialGameResult::new();
 
-        // Should defect after two consecutive opponent defections
-        assert_eq!(strategy.decide(&history), Move::Deflect);
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        assert_eq!(StrategySlowTitForTat::decide(&history), Move::Defect);
     }
 
     #[test]
     fn slow_tit_for_tat_cooperates_after_double_cooperation() {
-        let strategy = StrategySlowTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Deflect, Move::Cooperate));
-        history.add_round(Round::new(Move::Deflect, Move::Cooperate));
+        let mut history = PartialGameResult::new();
 
-        // Should cooperate after two consecutive opponent cooperations
-        assert_eq!(strategy.decide(&history), Move::Cooperate);
+        history.add_round(Round::new(Move::Defect, Move::Cooperate));
+        history.add_round(Round::new(Move::Defect, Move::Cooperate));
+        assert_eq!(StrategySlowTitForTat::decide(&history), Move::Cooperate);
     }
 
     #[test]
     fn slow_tit_for_tat_mimics_last_move() {
-        let strategy = StrategySlowTitForTat;
-        let mut history = History::new();
-        history.add_round(Round::new(Move::Deflect, Move::Cooperate));
-        history.add_round(Round::new(Move::Cooperate, Move::Deflect));
+        let mut history = PartialGameResult::new();
 
-        // Should mimic opponent's last move if not two consecutive same moves
-        assert_eq!(strategy.decide(&history), Move::Deflect);
+        history.add_round(Round::new(Move::Defect, Move::Cooperate));
+        history.add_round(Round::new(Move::Cooperate, Move::Defect));
+        assert_eq!(StrategySlowTitForTat::decide(&history), Move::Defect);
     }
 }
