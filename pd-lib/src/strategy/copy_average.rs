@@ -1,6 +1,6 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::{ StrategyTrait};
+use crate::strategy::StrategyTrait;
 use rand::Rng;
 
 pub struct StrategyCopyAverage;
