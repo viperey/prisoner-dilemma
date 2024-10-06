@@ -7,17 +7,13 @@ Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
 ## TODO
 
 - [ ] StrategyGradual (fix)
-- [ ] Iterate the code to make it more Rust idiomatic
-- [ ] Fix gradual
-- [ ] Moar strategies
-- [ ] Population
-- [ ] Decay of strategies
 - [ ] Add every known strategies
 - [ ] Test every the strategy individually
-- [ ] Make a GUI
+- [ ] Make a GUI/Cli. Something to allow to play with it.
 
 ## Pending Strategies
 
+- 12.pdf -> probabilistic strategies
 - https://github.com/Axelrod-Python/Axelrod/blob/dev/axelrod/strategies/_strategies.py
 - **mem2**: Complex strategy shifting between all_d, tit_for_tat, and tf2t based on recent outcomes and pays attention to memory, adjusting strategy accordingly.
 - Probability p Cooperator - Unlikely: Not directly represented
@@ -38,6 +34,7 @@ Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
 
 ## Bibliography
 
+- https://thedecisionlab.com/reference-guide/psychology/prisoners-dilemma
 - https://en.wikipedia.org/wiki/Prisoner%27s_dilemma
 - https://scriptim.github.io/PrisonersDilemma/?s1=RAND&s2=RAND&i=344#game
 - https://github.com/Scriptim/PrisonersDilemma
