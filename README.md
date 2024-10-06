@@ -2,7 +2,8 @@
 
 Rust implementation of the Prisoner's Dilemma.
 Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
-
+  
+Disclaimer: project mainly used to learning Rust language and play around this beautiful problem. Library not mature for production use (yet?).
 
 ## TODO
 
