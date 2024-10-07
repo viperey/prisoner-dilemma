@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyProber;
-impl StrategyTrait for StrategyProber {
+impl StrategyBehavior for StrategyProber {
     fn decide(history: &PartialGameResult) -> Move {
         let round_number = history.rounds.len();
 

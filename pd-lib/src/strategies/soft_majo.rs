@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategySoftMajo;
-impl StrategyTrait for StrategySoftMajo {
+impl StrategyBehavior for StrategySoftMajo {
     fn decide(history: &PartialGameResult) -> Move {
         let cooperations = history
             .rounds

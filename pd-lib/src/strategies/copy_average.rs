@@ -1,10 +1,10 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 use rand::Rng;
 
 pub struct StrategyCopyAverage;
-impl StrategyTrait for StrategyCopyAverage {
+impl StrategyBehavior for StrategyCopyAverage {
     fn decide(history: &PartialGameResult) -> Move {
         let total_rounds = history.rounds.len();
         if total_rounds == 0 {

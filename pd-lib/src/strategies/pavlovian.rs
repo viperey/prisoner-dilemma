@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyPavlovian;
-impl StrategyTrait for StrategyPavlovian {
+impl StrategyBehavior for StrategyPavlovian {
     fn decide(history: &PartialGameResult) -> Move {
         history
             .last_round()

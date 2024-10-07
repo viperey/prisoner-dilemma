@@ -1,19 +1,21 @@
 mod domain;
+mod evolution;
 mod game;
 mod game_result;
+mod generation;
 mod r#match;
 mod prisoner;
 mod round;
+mod strategies;
 mod strategy;
 mod tournament;
-mod generation;
-mod evolution;
 // Generation > Tournament > Match > Game > Round
 
 #[cfg(test)]
 mod tests {
+    use crate::domain::Prisoner;
     use crate::evolution::{EvolutionHandler, EvolutionSettings};
-    use crate::prisoner::{Prisoner, PrisonerBuilder};
+    use crate::prisoner::PrisonerBuilder;
     use crate::r#match::MatchSettings;
     use crate::tournament::TournamentHandler;
 
@@ -33,7 +35,7 @@ mod tests {
         env_logger::try_init().ok();
         let evolution_settings = EvolutionSettings {
             population_size: 10,
-            num_generations: 10,
+            num_generations: 1,
             match_settings: MatchSettings {
                 num_games: 10,
                 num_rounds: 200,

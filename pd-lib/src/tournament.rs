@@ -1,6 +1,5 @@
-use crate::prisoner::Prisoner;
+use crate::domain::{Prisoner, StrategyId};
 use crate::r#match::{MatchHandler, MatchResult, MatchSettings};
-use crate::strategy::StrategyName;
 use itertools::Itertools;
 use log::debug;
 use rayon::prelude::*;
@@ -11,18 +10,18 @@ pub struct TournamentResult {
 }
 
 impl TournamentResult {
-    pub fn get_population_type_count(&self) -> HashMap<StrategyName, usize> {
+    pub fn get_population_type_count(&self) -> HashMap<StrategyId, usize> {
         self.tournament_scores
             .clone()
             .keys()
-            .counts_by(|prisoner| prisoner.strategy.clone())
+            .counts_by(|prisoner| prisoner.strategy.id)
     }
 }
 
 pub struct TournamentHandler;
 
 impl TournamentHandler {
-    pub fn play(population: &Vec<Prisoner>, match_settings: &MatchSettings) -> TournamentResult {
+    pub fn play(population: &[Prisoner], match_settings: &MatchSettings) -> TournamentResult {
         let matches: Vec<(Prisoner, Prisoner)> = Self::build_all_matches(population).to_owned();
         Self::play_matches(match_settings, matches)
     }
@@ -49,7 +48,7 @@ impl TournamentHandler {
         prisoner_a: &Prisoner,
         prisoner_b: &Prisoner,
     ) -> MatchResult {
-        let match_result = MatchHandler::play(&settings, prisoner_a, prisoner_b);
+        let match_result = MatchHandler::play(settings, prisoner_a, prisoner_b);
         debug!(
             "Match result: {:#?}={:#?} vs {:#?}={:#?}",
             prisoner_a.strategy.clone(),
@@ -60,7 +59,7 @@ impl TournamentHandler {
         match_result
     }
 
-    fn build_all_matches(population: &Vec<Prisoner>) -> Vec<(Prisoner, Prisoner)> {
+    fn build_all_matches(population: &[Prisoner]) -> Vec<(Prisoner, Prisoner)> {
         population
             .iter()
             .enumerate()

@@ -8,9 +8,14 @@ Disclaimer: project mainly used to learning Rust language and play around this b
 ## TODO
 
 - [ ] StrategyGradual (fix)
-- [ ] Add every known strategies
-- [ ] Test every the strategy individually
+- [ ] Add every known strategies, along with their tests.
+- [ ] Make sure the lib actually has library structure/release.
 - [ ] Make a GUI/Cli. Something to allow to play with it.
+
+## Experiments
+
+- [ ] Constant data. Pure constant data. Even if that implies lifetime annotations. Walk that mille.
+
 
 ## Pending Strategies
 

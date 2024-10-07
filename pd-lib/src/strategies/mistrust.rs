@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyMistrust;
-impl StrategyTrait for StrategyMistrust {
+impl StrategyBehavior for StrategyMistrust {
     fn decide(history: &PartialGameResult) -> Move {
         if history.rounds.is_empty() {
             Move::Defect

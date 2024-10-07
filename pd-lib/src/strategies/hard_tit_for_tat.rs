@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyHardTitForTat;
-impl StrategyTrait for StrategyHardTitForTat {
+impl StrategyBehavior for StrategyHardTitForTat {
     fn decide(history: &PartialGameResult) -> Move {
         let total_rounds = history.rounds.len();
         if total_rounds < 2 {

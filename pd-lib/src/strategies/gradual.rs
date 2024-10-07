@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyGradual;
-impl StrategyTrait for StrategyGradual {
+impl StrategyBehavior for StrategyGradual {
     fn decide(history: &PartialGameResult) -> Move {
         if history.rounds.is_empty() {
             return Move::Cooperate;

@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyAlwaysDefect;
-impl StrategyTrait for StrategyAlwaysDefect {
+impl StrategyBehavior for StrategyAlwaysDefect {
     fn decide(_: &PartialGameResult) -> Move {
         Move::Defect
     }

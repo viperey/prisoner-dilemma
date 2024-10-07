@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyTitForTwoTats;
-impl StrategyTrait for StrategyTitForTwoTats {
+impl StrategyBehavior for StrategyTitForTwoTats {
     fn decide(history: &PartialGameResult) -> Move {
         let rounds = &history.rounds;
         let total_rounds = rounds.len();

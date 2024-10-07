@@ -1,10 +1,10 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 use rand::Rng;
 
 pub struct StrategyGenerousTitForTat;
-impl StrategyTrait for StrategyGenerousTitForTat {
+impl StrategyBehavior for StrategyGenerousTitForTat {
     fn decide(history: &PartialGameResult) -> Move {
         let mut rng = rand::thread_rng();
         if rng.gen_bool(0.1) {

@@ -1,10 +1,10 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 use rand::Rng;
 
 pub struct StrategyRandom;
-impl StrategyTrait for StrategyRandom {
+impl StrategyBehavior for StrategyRandom {
     fn decide(_history: &PartialGameResult) -> Move {
         let mut rng = rand::thread_rng();
         let is_cooperate: bool = rng.gen_bool(0.5);

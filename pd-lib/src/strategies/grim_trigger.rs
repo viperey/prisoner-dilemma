@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyGrimTrigger;
-impl StrategyTrait for StrategyGrimTrigger {
+impl StrategyBehavior for StrategyGrimTrigger {
     fn decide(history: &PartialGameResult) -> Move {
         let opponent_defected = history
             .rounds

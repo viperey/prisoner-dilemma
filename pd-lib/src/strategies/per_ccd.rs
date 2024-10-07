@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyPerCCD;
-impl StrategyTrait for StrategyPerCCD {
+impl StrategyBehavior for StrategyPerCCD {
     fn decide(history: &PartialGameResult) -> Move {
         let round_number = history.rounds.len();
         match round_number % 3 {

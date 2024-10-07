@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyAlwaysCooperate;
-impl StrategyTrait for StrategyAlwaysCooperate {
+impl StrategyBehavior for StrategyAlwaysCooperate {
     fn decide(_: &PartialGameResult) -> Move {
         Move::Cooperate
     }

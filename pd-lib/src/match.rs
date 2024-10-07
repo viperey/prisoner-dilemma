@@ -1,6 +1,6 @@
+use crate::domain::Prisoner;
 use crate::game::GameHandler;
 use crate::game_result::GameResult;
-use crate::prisoner::Prisoner;
 use rayon::prelude::*;
 
 pub struct MatchSettings {
@@ -11,7 +11,7 @@ pub struct MatchSettings {
 pub struct MatchResult {
     pub game_results: Vec<GameResult>,
     pub prisoner_a_score: usize,
-    pub prisoner_b_score: usize
+    pub prisoner_b_score: usize,
 }
 
 impl MatchResult {
@@ -24,7 +24,7 @@ impl MatchResult {
         }
     }
 
-    fn get_scores(game_results: &Vec<GameResult>) -> (usize, usize) {
+    fn get_scores(game_results: &[GameResult]) -> (usize, usize) {
         game_results.iter().fold((0, 0), |(a, b), game_result| {
             let (partial_count_a, partial_count_b) = game_result.get_score();
             (partial_count_a + a, partial_count_b + b)

@@ -1,13 +1,13 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 use rand::Rng;
 
-pub struct StrategyAlmostAlwaysCooperate;
-impl StrategyTrait for StrategyAlmostAlwaysCooperate {
+pub struct StrategyAlmostAlwaysDefect;
+impl StrategyBehavior for StrategyAlmostAlwaysDefect {
     fn decide(_: &PartialGameResult) -> Move {
         let mut rng = rand::thread_rng();
-        let is_cooperate: bool = rng.gen_bool(0.9);
+        let is_cooperate: bool = rng.gen_bool(0.1);
         match is_cooperate {
             true => Move::Cooperate,
             false => Move::Defect,
@@ -27,13 +27,13 @@ mod tests {
         let trials = 100_000;
 
         for _ in 0..trials {
-            if StrategyAlmostAlwaysCooperate::decide(&history) == Move::Cooperate {
+            if StrategyAlmostAlwaysDefect::decide(&history) == Move::Cooperate {
                 cooperate_count += 1;
             }
         }
 
         let cooperation_rate = (cooperate_count as f64) / (trials as f64);
-        let expected_cooperation_rate = 0.9;
+        let expected_cooperation_rate = 0.1;
         let error_margin = 0.05;
 
         assert!(

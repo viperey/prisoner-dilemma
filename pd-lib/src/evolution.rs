@@ -1,5 +1,5 @@
+use crate::domain::Prisoner;
 use crate::generation::GenerationHandler;
-use crate::prisoner::Prisoner;
 use crate::r#match::MatchSettings;
 use crate::tournament::{TournamentHandler, TournamentResult};
 use either::Either;

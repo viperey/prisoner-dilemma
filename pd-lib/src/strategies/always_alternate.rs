@@ -1,9 +1,9 @@
 use crate::domain::Move;
 use crate::game_result::PartialGameResult;
-use crate::strategy::StrategyTrait;
+use crate::strategies::StrategyBehavior;
 
 pub struct StrategyAlternate;
-impl StrategyTrait for StrategyAlternate {
+impl StrategyBehavior for StrategyAlternate {
     fn decide(history: &PartialGameResult) -> Move {
         if history.rounds.len() % 2 == 0 {
             Move::Cooperate
