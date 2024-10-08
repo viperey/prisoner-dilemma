@@ -1,3 +1,11 @@
+//! Rust implementation of the Prisoner's Dilemma.
+//!
+//! Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
+//!
+//! Entities topology: Generation > Tournament > Match > Game > Round
+
+#![deny(missing_docs)]
+#![deny(rustdoc::all)]
 mod domain;
 mod evolution;
 mod game;
@@ -9,7 +17,6 @@ mod round;
 mod strategies;
 mod strategy;
 mod tournament;
-// Generation > Tournament > Match > Game > Round
 
 #[cfg(test)]
 mod tests {
@@ -19,7 +26,7 @@ mod tests {
     use crate::r#match::MatchSettings;
     use crate::tournament::TournamentHandler;
 
-    // #[test]
+    #[test]
     fn test_tournament() {
         env_logger::try_init().ok();
         let match_settings = MatchSettings {
