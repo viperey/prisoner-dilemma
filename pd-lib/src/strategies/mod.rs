@@ -5,6 +5,8 @@ mod always_cooperate;
 mod always_defect;
 mod appease;
 mod copy_average;
+mod equalizers;
+mod extortions;
 mod generous_tit_for_tat;
 mod gradual;
 mod grim_trigger;
@@ -31,6 +33,8 @@ use crate::strategies::always_cooperate::StrategyAlwaysCooperate;
 use crate::strategies::always_defect::StrategyAlwaysDefect;
 use crate::strategies::appease::StrategyAppease;
 use crate::strategies::copy_average::StrategyCopyAverage;
+use crate::strategies::equalizers::*;
+use crate::strategies::extortions::*;
 use crate::strategies::generous_tit_for_tat::StrategyGenerousTitForTat;
 use crate::strategies::gradual::StrategyGradual;
 use crate::strategies::grim_trigger::StrategyGrimTrigger;
@@ -66,6 +70,18 @@ impl StrategyBehaviorFacade {
             StrategyId::AlwaysDefect => StrategyAlwaysDefect::decide(pgr),
             StrategyId::Appease => StrategyAppease::decide(pgr),
             StrategyId::CopyAverage => StrategyCopyAverage::decide(pgr),
+            StrategyId::EqualizerA => StrategyEqualizerA::decide(pgr),
+            StrategyId::EqualizerB => StrategyEqualizerB::decide(pgr),
+            StrategyId::EqualizerC => StrategyEqualizerC::decide(pgr),
+            StrategyId::EqualizerD => StrategyEqualizerD::decide(pgr),
+            StrategyId::EqualizerE => StrategyEqualizerE::decide(pgr),
+            StrategyId::EqualizerF => StrategyEqualizerF::decide(pgr),
+            StrategyId::ExtortionA => StrategyExtortionA::decide(pgr),
+            StrategyId::ExtortionB => StrategyExtortionB::decide(pgr),
+            StrategyId::ExtortionC => StrategyExtortionC::decide(pgr),
+            StrategyId::ExtortionD => StrategyExtortionD::decide(pgr),
+            StrategyId::ExtortionE => StrategyExtortionE::decide(pgr),
+            StrategyId::ExtortionF => StrategyExtortionF::decide(pgr),
             StrategyId::GenerousTitForTat => StrategyGenerousTitForTat::decide(pgr),
             StrategyId::Gradual => StrategyGradual::decide(pgr),
             StrategyId::GrimTrigger => StrategyGrimTrigger::decide(pgr),
@@ -90,5 +106,20 @@ impl StrategyBehaviorFacade {
             end_time.duration_since(start_time).as_secs_f64()
         );
         result
+    }
+}
+
+pub mod utils {
+    use rand::Rng;
+
+    use crate::domain::Move;
+
+    pub fn decide(probability: f64) -> Move {
+        let mut rng = rand::thread_rng();
+        let is_cooperate: bool = rng.gen_bool(probability);
+        match is_cooperate {
+            true => Move::Cooperate,
+            false => Move::Defect,
+        }
     }
 }

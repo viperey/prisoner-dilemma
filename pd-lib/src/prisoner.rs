@@ -13,6 +13,18 @@ impl PrisonerBuilder {
             PrisonerBuilder::always_defect(),
             PrisonerBuilder::appease(),
             PrisonerBuilder::copy_average(),
+            PrisonerBuilder::equalizer_a(),
+            PrisonerBuilder::equalizer_b(),
+            PrisonerBuilder::equalizer_c(),
+            PrisonerBuilder::equalizer_d(),
+            PrisonerBuilder::equalizer_e(),
+            PrisonerBuilder::equalizer_f(),
+            PrisonerBuilder::extortion_a(),
+            PrisonerBuilder::extortion_b(),
+            PrisonerBuilder::extortion_c(),
+            PrisonerBuilder::extortion_d(),
+            PrisonerBuilder::extortion_e(),
+            PrisonerBuilder::extortion_f(),
             PrisonerBuilder::generous_tit_for_tat(),
             PrisonerBuilder::gradual(),
             PrisonerBuilder::grim_trigger(),
@@ -75,7 +87,7 @@ impl PrisonerBuilder {
     pub fn appease() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Appo ".to_string(), 
+            name: "Appo ".to_string(),
             strategy: StrategyBuilder::appease(),
         }
     }
@@ -83,8 +95,104 @@ impl PrisonerBuilder {
     pub fn copy_average() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Copiota ".to_string(), 
+            name: "Copiota ".to_string(),
             strategy: StrategyBuilder::copy_average(),
+        }
+    }
+
+    pub fn equalizer_a() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore A".to_string(),
+            strategy: StrategyBuilder::equalizer_a(),
+        }
+    }
+
+    pub fn equalizer_b() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore B".to_string(),
+            strategy: StrategyBuilder::equalizer_b(),
+        }
+    }
+
+    pub fn equalizer_c() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore C".to_string(),
+            strategy: StrategyBuilder::equalizer_c(),
+        }
+    }
+
+    pub fn equalizer_d() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore D".to_string(),
+            strategy: StrategyBuilder::equalizer_d(),
+        }
+    }
+
+    pub fn equalizer_e() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore E".to_string(),
+            strategy: StrategyBuilder::equalizer_e(),
+        }
+    }
+
+    pub fn equalizer_f() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Equalizzatore F".to_string(),
+            strategy: StrategyBuilder::equalizer_f(),
+        }
+    }
+
+    pub fn extortion_a() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione A".to_string(),
+            strategy: StrategyBuilder::extortion_a(),
+        }
+    }
+
+    pub fn extortion_b() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione B".to_string(),
+            strategy: StrategyBuilder::extortion_b(),
+        }
+    }
+
+    pub fn extortion_c() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione C".to_string(),
+            strategy: StrategyBuilder::extortion_c(),
+        }
+    }
+
+    pub fn extortion_d() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione D".to_string(),
+            strategy: StrategyBuilder::extortion_d(),
+        }
+    }
+
+    pub fn extortion_e() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione E".to_string(),
+            strategy: StrategyBuilder::extortion_e(),
+        }
+    }
+
+    pub fn extortion_f() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Extorsione F".to_string(),
+            strategy: StrategyBuilder::extortion_f(),
         }
     }
 
@@ -99,7 +207,7 @@ impl PrisonerBuilder {
     pub fn gradual() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Topazo ".to_string(), 
+            name: "Topazo ".to_string(),
             strategy: StrategyBuilder::gradual(),
         }
     }
@@ -115,7 +223,7 @@ impl PrisonerBuilder {
     pub fn hard_majo() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Majazo ".to_string(), 
+            name: "Majazo ".to_string(),
             strategy: StrategyBuilder::hard_majo(),
         }
     }
@@ -123,7 +231,7 @@ impl PrisonerBuilder {
     pub fn hard_tit_for_tat() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Titan ".to_string(), 
+            name: "Titan ".to_string(),
             strategy: StrategyBuilder::hard_tit_for_tat(),
         }
     }
@@ -140,7 +248,7 @@ impl PrisonerBuilder {
     pub fn pavlovian() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Chuchico ".to_string(), 
+            name: "Chuchico ".to_string(),
             strategy: StrategyBuilder::pavlovian(),
         }
     }
@@ -164,7 +272,7 @@ impl PrisonerBuilder {
     pub fn prober() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Mentecato ".to_string(), 
+            name: "Mentecato ".to_string(),
             strategy: StrategyBuilder::prober(),
         }
     }
@@ -180,7 +288,7 @@ impl PrisonerBuilder {
     pub fn slow_tit_for_tat() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Titin ".to_string(), 
+            name: "Titin ".to_string(),
             strategy: StrategyBuilder::slow_tit_for_tat(),
         }
     }
@@ -188,7 +296,7 @@ impl PrisonerBuilder {
     pub fn soft_majo() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Majin ".to_string(), 
+            name: "Majin ".to_string(),
             strategy: StrategyBuilder::soft_majo(),
         }
     }
@@ -204,7 +312,7 @@ impl PrisonerBuilder {
     pub fn tit_for_two_tats() -> Prisoner {
         Prisoner {
             id: Uuid::new_v4(),
-            name: "Titatan ".to_string(), 
+            name: "Titatan ".to_string(),
             strategy: StrategyBuilder::tit_for_two_tats(),
         }
     }

@@ -66,6 +66,114 @@ impl StrategyBuilder {
         }
     }
 
+    pub fn equalizer_a() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerA,
+            name: "Equalizer A".to_string(),
+            description: "Start cooperating, then play with probabilities cc = 3/4 cd = 1/4 dc = 1/2 dd = 1/4 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn equalizer_b() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerB,
+            name: "Equalizer B".to_string(),
+            description: "Start cooperating, then play with probabilities cc = 9/10 cd = 7/10 dc = 1/5 dd = 1/10 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn equalizer_c() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerC,
+            name: "Equalizer C".to_string(),
+            description: "Start cooperating, then play with probabilities cc = 9/10 cd = 1/2 dc = 1/2 dd = 3/10 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn equalizer_d() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerD,
+            name: "Equalizer D".to_string(),
+            description: "Start cooperating, then play with probabilities cc 27/35 cd = 17/35 dc = 1/5 dd = 2/35 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn equalizer_e() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerE,
+            name: "Equalizer E".to_string(),
+            description: "Start cooperating, then play with probabilities cc = 2/3 cd = 0 dc = 2/3 dd = 1/ given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn equalizer_f() -> Strategy {
+        Strategy {
+            id: StrategyId::EqualizerF,
+            name: "Equalizer F".to_string(),
+            description: "Start cooperating, then play with probabilities cc = 1 cd = 13/15 dc = 1/5 dd = 2/5 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_a() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionA,
+            name: "Extortion A".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 8/9 cd = 2/9 dc = 11/18 dd = 0 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_b() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionB,
+            name: "Extortion B".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 0.8 cd = 0.1 dc = 0.6 dd = 0 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_c() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionC,
+            name: "Extortion C".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 11/12 cd = 5/24 dc = 2/3 dd = 1/24 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_d() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionD,
+            name: "Extortion D".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 5/6 cd = 0.2 dc = 0.5 dd = 0 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_e() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionE,
+            name: "Extortion E".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 17/20 cd = 3/40 dc = 0.7 dd = 0 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
+    pub fn extortion_f() -> Strategy {
+        Strategy {
+            id: StrategyId::ExtortionF,
+            name: "Extortion F".to_string(),
+            description: "Start by cooperating, then play with probabilities cc = 11/15 cd = 2/15 dc = 7/15 dd = 0 given a past movement".to_string(),
+            is_nice: true,
+        }
+    }
+
     pub fn generous_tit_for_tat() -> Strategy {
         Strategy {
             id: StrategyId::GenerousTitForTat,

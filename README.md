@@ -19,10 +19,8 @@ Disclaimer: project mainly used to learning Rust language and play around this b
 
 ## Pending Strategies
 
-- 12.pdf -> probabilistic strategies
 - https://github.com/Axelrod-Python/Axelrod/blob/dev/axelrod/strategies/_strategies.py
 - **mem2**: Complex strategy shifting between all_d, tit_for_tat, and tf2t based on recent outcomes and pays attention to memory, adjusting strategy accordingly.
-- Probability p Cooperator - Unlikely: Not directly represented
 - Suspicious Tit for Tat (STFT)
 - Imperfect TFT (ImpTFT)
 - Omega Tit for Tat (ΩTFT)
