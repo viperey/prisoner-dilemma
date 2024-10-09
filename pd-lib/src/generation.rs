@@ -32,7 +32,7 @@ impl GenerationHandler {
         let mut strategy_groups: HashMap<StrategyId, Vec<(&Prisoner, &usize)>> = HashMap::new();
         for (prisoner, score) in &tournament_result.tournament_scores {
             strategy_groups
-                .entry(prisoner.strategy.id.clone())
+                .entry(prisoner.strategy.id)
                 .or_default()
                 .push((prisoner, score));
         }

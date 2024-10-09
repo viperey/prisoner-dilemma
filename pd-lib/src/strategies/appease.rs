@@ -8,13 +8,13 @@ impl StrategyBehavior for StrategyAppease {
         history
             .last_round()
             .map(|last_round| {
-                return if last_round.their_move() == Move::Cooperate {
-                    last_round.my_move()
-                } else if last_round.my_move() == Move::Cooperate {
-                    Move::Defect
-                } else {
-                    Move::Cooperate
-                };
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
+                match (my_move, their_move) {
+                    (_, Move::Cooperate) => last_round.my_move(),
+                    (Move::Cooperate, _) => Move::Defect,
+                    _ => Move::Cooperate,
+                }
             })
             .unwrap_or(Move::Cooperate)
     }

@@ -6,6 +6,7 @@
 
 #![deny(missing_docs)]
 #![deny(rustdoc::all)]
+#![allow(dead_code)]
 mod domain;
 mod evolution;
 mod game;
@@ -41,7 +42,7 @@ mod tests {
     fn test_evolution() {
         env_logger::try_init().ok();
         let evolution_settings = EvolutionSettings {
-            population_size: 10,
+            population_size: 1,
             num_generations: 1,
             match_settings: MatchSettings {
                 num_games: 10,

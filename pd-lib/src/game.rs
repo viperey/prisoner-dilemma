@@ -9,7 +9,7 @@ impl GameHandler {
     pub fn play(num_rounds: i32, prisoner_a: &Prisoner, prisoner_b: &Prisoner) -> GameResult {
         let game_history: PartialGameResult =
             (0..num_rounds).fold(PartialGameResult::new(), |partial_game_result, index| {
-                Self::play_round(index, &prisoner_a, &prisoner_b, partial_game_result)
+                Self::play_round(index, prisoner_a, prisoner_b, partial_game_result)
             });
         GameResult {
             rounds: game_history.rounds,
@@ -24,8 +24,8 @@ impl GameHandler {
     ) -> PartialGameResult {
         let prisoner_a_game_results: &PartialGameResult = &partial_game_result.as_prisoner_a();
         let prisoner_b_game_results: &PartialGameResult = &partial_game_result.as_prisoner_b();
-        let prisoner_a_move = StrategyBehaviorFacade::decide(&prisoner_a, prisoner_a_game_results);
-        let prisoner_b_move = StrategyBehaviorFacade::decide(&prisoner_b, prisoner_b_game_results);
+        let prisoner_a_move = StrategyBehaviorFacade::decide(prisoner_a, prisoner_a_game_results);
+        let prisoner_b_move = StrategyBehaviorFacade::decide(prisoner_b, prisoner_b_game_results);
         debug!(
             "Round {}: Prisoner A ({:#?}) move: {:#?}, Prisoner B ({:#?}) move: {:#?}",
             index, prisoner_a.strategy, prisoner_a_move, prisoner_b.strategy, prisoner_b_move
