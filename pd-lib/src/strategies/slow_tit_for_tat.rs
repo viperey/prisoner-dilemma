@@ -12,16 +12,16 @@ impl StrategyBehavior for StrategySlowTitForTat {
         let last_two_moves = &history.rounds[total_rounds.saturating_sub(2)..];
         if last_two_moves
             .iter()
-            .all(|round| *round.their_move() == Move::Defect)
+            .all(|round| round.their_move() == Move::Defect)
         {
             Move::Defect
         } else if last_two_moves
             .iter()
-            .all(|round| *round.their_move() == Move::Cooperate)
+            .all(|round| round.their_move() == Move::Cooperate)
         {
             Move::Cooperate
         } else {
-            history.last_round().unwrap().their_move().to_owned()
+            history.last_round().unwrap().their_move()
         }
     }
 }

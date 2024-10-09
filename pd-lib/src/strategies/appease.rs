@@ -8,9 +8,9 @@ impl StrategyBehavior for StrategyAppease {
         history
             .last_round()
             .map(|last_round| {
-                return if *last_round.their_move() == Move::Cooperate {
-                    last_round.my_move().to_owned()
-                } else if *last_round.my_move() == Move::Cooperate {
+                return if last_round.their_move() == Move::Cooperate {
+                    last_round.my_move()
+                } else if last_round.my_move() == Move::Cooperate {
                     Move::Defect
                 } else {
                     Move::Cooperate

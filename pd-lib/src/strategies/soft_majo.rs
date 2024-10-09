@@ -8,12 +8,12 @@ impl StrategyBehavior for StrategySoftMajo {
         let cooperations = history
             .rounds
             .iter()
-            .filter(|round| *round.their_move() == Move::Cooperate)
+            .filter(|round| round.their_move() == Move::Cooperate)
             .count();
         let defections = history
             .rounds
             .iter()
-            .filter(|round| *round.their_move() == Move::Defect)
+            .filter(|round| round.their_move() == Move::Defect)
             .count();
 
         if cooperations >= defections {

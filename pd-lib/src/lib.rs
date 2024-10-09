@@ -6,7 +6,6 @@
 
 #![deny(missing_docs)]
 #![deny(rustdoc::all)]
-
 mod domain;
 mod evolution;
 mod game;

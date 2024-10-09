@@ -16,8 +16,8 @@ impl StrategyBehavior for StrategyEqualizerA {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide(0.75),
                     (Move::Cooperate, Move::Defect) => utils::decide(0.25),
@@ -34,8 +34,8 @@ impl StrategyBehavior for StrategyEqualizerB {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide(0.9),
                     (Move::Cooperate, Move::Defect) => utils::decide(0.7),
@@ -52,8 +52,8 @@ impl StrategyBehavior for StrategyEqualizerC {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide(0.9),
                     (Move::Cooperate, Move::Defect) => utils::decide(0.5),
@@ -70,8 +70,8 @@ impl StrategyBehavior for StrategyEqualizerD {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((27 / 35) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide((17 / 35) as f64),
@@ -88,8 +88,8 @@ impl StrategyBehavior for StrategyEqualizerE {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((2 / 3) as f64),
                     (Move::Cooperate, Move::Defect) => Move::Defect,
@@ -106,8 +106,8 @@ impl StrategyBehavior for StrategyEqualizerF {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move().to_owned();
-                let their_move: Move = last_round.their_move().to_owned();
+                let my_move: Move = last_round.my_move();
+                let their_move: Move = last_round.their_move();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => Move::Cooperate,
                     (Move::Cooperate, Move::Defect) => utils::decide((13 / 15) as f64),

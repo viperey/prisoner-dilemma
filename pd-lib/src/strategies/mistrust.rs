@@ -10,7 +10,7 @@ impl StrategyBehavior for StrategyMistrust {
         } else {
             history
                 .last_round()
-                .map(|last_round| last_round.their_move().to_owned())
+                .map(|last_round| last_round.their_move())
                 .unwrap_or(Move::Defect)
         }
     }
