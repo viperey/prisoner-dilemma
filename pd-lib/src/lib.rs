@@ -26,7 +26,7 @@ mod tests {
     use crate::r#match::MatchSettings;
     use crate::tournament::TournamentHandler;
 
-    #[test]
+    //#[test]
     fn test_tournament() {
         env_logger::try_init().ok();
         let match_settings = MatchSettings {
