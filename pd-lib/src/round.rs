@@ -2,15 +2,15 @@ use crate::domain::Move;
 
 #[derive(Debug, Clone)]
 pub struct Round {
-    prisoner_a: Box<Move>,
-    prisoner_b: Box<Move>,
+    prisoner_a: Move,
+    prisoner_b: Move,
 }
 
 impl Round {
     pub fn new(my_move: Move, their_move: Move) -> Round {
         Round {
-            prisoner_a: Box::new(my_move),
-            prisoner_b: Box::new(their_move),
+            prisoner_a: my_move,
+            prisoner_b: their_move,
         }
     }
 
@@ -24,15 +24,15 @@ impl Round {
 
     pub fn as_prisoner_a(&self) -> Self {
         Round {
-            prisoner_a: self.prisoner_a.clone(),
-            prisoner_b: self.prisoner_b.clone(),
+            prisoner_a: self.my_move().to_owned(),
+            prisoner_b: self.their_move().to_owned(),
         }
     }
 
     pub fn as_prisoner_b(&self) -> Self {
         Round {
-            prisoner_a: self.prisoner_b.clone(),
-            prisoner_b: self.prisoner_a.clone(),
+            prisoner_a: self.their_move().to_owned(),
+            prisoner_b: self.my_move().to_owned(),
         }
     }
 }
