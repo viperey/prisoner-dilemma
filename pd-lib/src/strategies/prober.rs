@@ -11,15 +11,15 @@ impl StrategyBehavior for StrategyProber {
             0 => Move::Defect,
             1 | 2 => Move::Cooperate,
             _ => {
-                let initiated_tester_defection = history.rounds[1].their_move() == Move::Cooperate
-                    && history.rounds[2].their_move() == Move::Cooperate;
+                let initiated_tester_defection = *history.rounds[1].their_move() == Move::Cooperate
+                    && *history.rounds[2].their_move() == Move::Cooperate;
 
                 if initiated_tester_defection {
                     Move::Defect
                 } else {
                     history
                         .last_round()
-                        .map(|last_round| last_round.their_move())
+                        .map(|last_round| last_round.their_move().to_owned())
                         .unwrap_or(Move::Cooperate)
                 }
             }

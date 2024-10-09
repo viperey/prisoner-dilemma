@@ -12,7 +12,7 @@ impl StrategyBehavior for StrategyGradual {
         let last_two_moves = &history.rounds[history.rounds.len().saturating_sub(2)..];
         if last_two_moves
             .iter()
-            .all(|round| round.their_move() == Move::Cooperate)
+            .all(|round| *round.their_move() == Move::Cooperate)
         {
             Move::Cooperate
         } else {

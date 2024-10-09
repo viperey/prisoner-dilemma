@@ -13,7 +13,7 @@ impl StrategyBehavior for StrategyTwoTitsForTat {
         let last_two_moves = &rounds[total_rounds - 2..];
         if last_two_moves
             .iter()
-            .any(|round| round.their_move() == Move::Defect)
+            .any(|round| *round.their_move() == Move::Defect)
         {
             Move::Defect
         } else {

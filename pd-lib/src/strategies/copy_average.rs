@@ -14,7 +14,7 @@ impl StrategyBehavior for StrategyCopyAverage {
         let cooperate_count = history
             .rounds
             .iter()
-            .filter(|round| round.their_move() == Move::Cooperate)
+            .filter(|round| *round.their_move() == Move::Cooperate)
             .count();
 
         let cooperate_prob = cooperate_count as f64 / total_rounds as f64;
@@ -58,7 +58,7 @@ mod tests {
             let history = generate_history(percent, total_rounds);
 
             let mut cooperate_count = 0;
-            let trials = 1_000_0;
+            let trials = 10_000;
             for _ in 0..trials {
                 if StrategyCopyAverage::decide(&history) == Move::Cooperate {
                     cooperate_count += 1;

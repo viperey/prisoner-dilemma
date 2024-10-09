@@ -16,8 +16,8 @@ impl StrategyBehavior for StrategyExtortionA {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((8 / 9) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide((2 / 9) as f64),
@@ -34,8 +34,8 @@ impl StrategyBehavior for StrategyExtortionB {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide(0.8),
                     (Move::Cooperate, Move::Defect) => utils::decide(0.1),
@@ -52,8 +52,8 @@ impl StrategyBehavior for StrategyExtortionC {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((11 / 12) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide((5 / 24) as f64),
@@ -70,8 +70,8 @@ impl StrategyBehavior for StrategyExtortionD {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((5 / 6) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide(0.2),
@@ -88,8 +88,8 @@ impl StrategyBehavior for StrategyExtortionE {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((17 / 20) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide((3 / 40) as f64),
@@ -106,8 +106,8 @@ impl StrategyBehavior for StrategyExtortionF {
         history
             .last_round()
             .map(|last_round| {
-                let my_move: Move = last_round.my_move();
-                let their_move: Move = last_round.their_move();
+                let my_move: Move = last_round.my_move().to_owned();
+                let their_move: Move = last_round.their_move().to_owned();
                 match (my_move, their_move) {
                     (Move::Cooperate, Move::Cooperate) => utils::decide((11 / 15) as f64),
                     (Move::Cooperate, Move::Defect) => utils::decide((2 / 15) as f64),

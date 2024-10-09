@@ -7,7 +7,7 @@ impl StrategyBehavior for StrategyTitForTat {
     fn decide(history: &PartialGameResult) -> Move {
         history
             .last_round()
-            .map(|last_round| last_round.their_move())
+            .map(|last_round| last_round.their_move().to_owned())
             .unwrap_or(Move::Cooperate)
     }
 }
