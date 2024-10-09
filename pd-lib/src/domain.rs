@@ -32,6 +32,7 @@ pub enum StrategyId {
     TitForTwoTats,
     TwoTitsForTat,
     SoftMajo,
+    SuspiciousTitForTat,
     HardMajo,
     PerDDC,
     PerCCD,

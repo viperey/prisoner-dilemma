@@ -291,6 +291,17 @@ impl StrategyBuilder {
         }
     }
 
+    pub fn suspicious_tit_for_tat() -> Strategy {
+        Strategy {
+            id: StrategyId::SuspiciousTitForTat,
+            name: "Trueba".to_string(),
+            description:
+                "Defects on the first round and imitates its opponent's previous move thereafter."
+                    .to_string(),
+            is_nice: false,
+        }
+    }
+
     pub fn tit_for_tat() -> Strategy {
         Strategy {
             id: StrategyId::TitForTat,

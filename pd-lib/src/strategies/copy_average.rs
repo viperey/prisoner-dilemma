@@ -58,7 +58,7 @@ mod tests {
             let history = generate_history(percent, total_rounds);
 
             let mut cooperate_count = 0;
-            let trials = 1_000_0;
+            let trials = 10_000;
             for _ in 0..trials {
                 if StrategyCopyAverage::decide(&history) == Move::Cooperate {
                     cooperate_count += 1;

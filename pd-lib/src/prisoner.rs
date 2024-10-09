@@ -38,6 +38,7 @@ impl PrisonerBuilder {
             PrisonerBuilder::random(),
             PrisonerBuilder::slow_tit_for_tat(),
             PrisonerBuilder::soft_majo(),
+            PrisonerBuilder::suspicious_tit_for_tat(),
             PrisonerBuilder::tit_for_two_tats(),
             PrisonerBuilder::tit_for_tat(),
             PrisonerBuilder::two_tits_for_tat(),
@@ -298,6 +299,14 @@ impl PrisonerBuilder {
             id: Uuid::new_v4(),
             name: "Majin ".to_string(),
             strategy: StrategyBuilder::soft_majo(),
+        }
+    }
+
+    pub fn suspicious_tit_for_tat() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Trueba ".to_string(),
+            strategy: StrategyBuilder::suspicious_tit_for_tat(),
         }
     }
 

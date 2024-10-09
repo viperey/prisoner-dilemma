@@ -20,6 +20,7 @@ mod prober;
 mod random;
 mod slow_tit_for_tat;
 mod soft_majo;
+mod suspicious_tit_for_tat;
 mod tit_for_tat;
 mod tit_for_two_tats;
 mod two_tits_for_tat;
@@ -48,6 +49,7 @@ use crate::strategies::prober::StrategyProber;
 use crate::strategies::random::StrategyRandom;
 use crate::strategies::slow_tit_for_tat::StrategySlowTitForTat;
 use crate::strategies::soft_majo::StrategySoftMajo;
+use crate::strategies::suspicious_tit_for_tat::StrategySuspiciousTitForTat;
 use crate::strategies::tit_for_tat::StrategyTitForTat;
 use crate::strategies::tit_for_two_tats::StrategyTitForTwoTats;
 use crate::strategies::two_tits_for_tat::StrategyTwoTitsForTat;
@@ -95,6 +97,7 @@ impl StrategyBehaviorFacade {
             StrategyId::Random => StrategyRandom::decide(pgr),
             StrategyId::SlowTitForTat => StrategySlowTitForTat::decide(pgr),
             StrategyId::SoftMajo => StrategySoftMajo::decide(pgr),
+            StrategyId::SuspiciousTitForTat => StrategySuspiciousTitForTat::decide(pgr),
             StrategyId::TitForTat => StrategyTitForTat::decide(pgr),
             StrategyId::TitForTwoTats => StrategyTitForTwoTats::decide(pgr),
             StrategyId::TwoTitsForTat => StrategyTwoTitsForTat::decide(pgr),
