@@ -1,16 +1,18 @@
+use std::{rc::Rc, sync::Arc};
+
 use crate::domain::Move;
 
 #[derive(Debug, Clone)]
 pub struct Round {
-    prisoner_a: Box<Move>,
-    prisoner_b: Box<Move>,
+    prisoner_a: Arc<Move>,
+    prisoner_b: Arc<Move>,
 }
 
 impl Round {
     pub fn new(my_move: Move, their_move: Move) -> Round {
         Round {
-            prisoner_a: Box::new(my_move),
-            prisoner_b: Box::new(their_move),
+            prisoner_a: Arc::new(my_move),
+            prisoner_b: Arc::new(their_move),
         }
     }
 
