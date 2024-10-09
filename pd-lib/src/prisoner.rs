@@ -37,6 +37,7 @@ impl PrisonerBuilder {
             PrisonerBuilder::per_ddc(),
             PrisonerBuilder::prober(),
             PrisonerBuilder::random(),
+            PrisonerBuilder::reactive(),
             PrisonerBuilder::slow_tit_for_tat(),
             PrisonerBuilder::soft_majo(),
             PrisonerBuilder::suspicious_tit_for_tat(),
@@ -292,6 +293,14 @@ impl PrisonerBuilder {
             id: Uuid::new_v4(),
             name: "Litios ".to_string(),
             strategy: StrategyBuilder::random(),
+        }
+    }
+
+    pub fn reactive() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Carcundo".to_string(),
+            strategy: StrategyBuilder::reactive(),
         }
     }
 

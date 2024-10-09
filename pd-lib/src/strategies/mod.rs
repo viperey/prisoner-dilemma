@@ -19,6 +19,7 @@ mod per_ccd;
 mod per_ddc;
 mod prober;
 mod random;
+mod reactive;
 mod slow_tit_for_tat;
 mod soft_majo;
 mod suspicious_tit_for_tat;
@@ -49,6 +50,7 @@ use crate::strategies::per_ccd::StrategyPerCCD;
 use crate::strategies::per_ddc::StrategyPerDDC;
 use crate::strategies::prober::StrategyProber;
 use crate::strategies::random::StrategyRandom;
+use crate::strategies::reactive::StrategyReactive;
 use crate::strategies::slow_tit_for_tat::StrategySlowTitForTat;
 use crate::strategies::soft_majo::StrategySoftMajo;
 use crate::strategies::suspicious_tit_for_tat::StrategySuspiciousTitForTat;
@@ -98,6 +100,7 @@ impl StrategyBehaviorFacade {
             StrategyId::PerDDC => StrategyPerDDC::decide(pgr),
             StrategyId::Prober => StrategyProber::decide(pgr),
             StrategyId::Random => StrategyRandom::decide(pgr),
+            StrategyId::Reactive => StrategyReactive::decide(pgr),
             StrategyId::SlowTitForTat => StrategySlowTitForTat::decide(pgr),
             StrategyId::SoftMajo => StrategySoftMajo::decide(pgr),
             StrategyId::SuspiciousTitForTat => StrategySuspiciousTitForTat::decide(pgr),

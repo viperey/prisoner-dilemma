@@ -282,6 +282,15 @@ impl StrategyBuilder {
         }
     }
 
+    pub fn reactive() -> Strategy {
+        Strategy {
+            id: StrategyId::Reactive,
+            name: "Reactive with parameters".to_string(),
+            description: "Cooperates with probability y in first round and with probabilities p or q after opponent cooperates or defects".to_string(),
+            is_nice: false,
+        }
+    }
+
     pub fn slow_tit_for_tat() -> Strategy {
         Strategy {
             id: StrategyId::SlowTitForTat,
@@ -303,7 +312,7 @@ impl StrategyBuilder {
     pub fn suspicious_tit_for_tat() -> Strategy {
         Strategy {
             id: StrategyId::SuspiciousTitForTat,
-            name: "Trueba".to_string(),
+            name: "Suspicious Tit For Tat".to_string(),
             description:
                 "Defects on the first round and imitates its opponent's previous move thereafter."
                     .to_string(),
