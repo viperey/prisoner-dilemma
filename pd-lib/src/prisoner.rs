@@ -8,6 +8,7 @@ impl PrisonerBuilder {
         vec![
             PrisonerBuilder::almost_always_cooperate(),
             PrisonerBuilder::almost_always_defect(),
+            PrisonerBuilder::almost_always_tit_for_tat(),
             PrisonerBuilder::always_alternate(),
             PrisonerBuilder::always_cooperate(),
             PrisonerBuilder::always_defect(),
@@ -58,6 +59,14 @@ impl PrisonerBuilder {
             id: Uuid::new_v4(),
             name: "Chof ".to_string(),
             strategy: StrategyBuilder::almost_always_defect(),
+        }
+    }
+
+    pub fn almost_always_tit_for_tat() -> Prisoner {
+        Prisoner {
+            id: Uuid::new_v4(),
+            name: "Tefito".to_string(),
+            strategy: StrategyBuilder::almost_always_tit_for_tat(),
         }
     }
 

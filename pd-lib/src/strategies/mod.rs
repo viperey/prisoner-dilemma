@@ -1,5 +1,6 @@
 mod almost_always_cooperate;
 mod almost_always_defect;
+mod almost_always_tit_for_tat;
 mod always_alternate;
 mod always_cooperate;
 mod always_defect;
@@ -29,6 +30,7 @@ use crate::domain::{Move, Prisoner, StrategyId};
 use crate::game_result::PartialGameResult;
 use crate::strategies::almost_always_cooperate::StrategyAlmostAlwaysCooperate;
 use crate::strategies::almost_always_defect::StrategyAlmostAlwaysDefect;
+use crate::strategies::almost_always_tit_for_tat::StrategyAlmostAlwaysTitForTat;
 use crate::strategies::always_alternate::StrategyAlternate;
 use crate::strategies::always_cooperate::StrategyAlwaysCooperate;
 use crate::strategies::always_defect::StrategyAlwaysDefect;
@@ -67,6 +69,7 @@ impl StrategyBehaviorFacade {
         let result = match prisoner.strategy.id {
             StrategyId::AlmostAlwaysCooperate => StrategyAlmostAlwaysCooperate::decide(pgr),
             StrategyId::AlmostAlwaysDefect => StrategyAlmostAlwaysDefect::decide(pgr),
+            StrategyId::AlmostAlwaysTitForTat => StrategyAlmostAlwaysTitForTat::decide(pgr),
             StrategyId::Alternate => StrategyAlternate::decide(pgr),
             StrategyId::AlwaysCooperate => StrategyAlwaysCooperate::decide(pgr),
             StrategyId::AlwaysDefect => StrategyAlwaysDefect::decide(pgr),

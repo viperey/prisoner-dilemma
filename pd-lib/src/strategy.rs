@@ -21,6 +21,15 @@ impl StrategyBuilder {
         }
     }
 
+    pub fn almost_always_tit_for_tat() -> Strategy {
+        Strategy {
+            id: StrategyId::AlmostAlwaysTitForTat,
+            name: "Almost Always Tit For Tat".to_string(),
+            description: "Always tit for tat, but make a mistake 10% of the time. Also called Imperfect TFT (ImpTFT).".to_string(),
+            is_nice: false,
+        }
+    }
+
     pub fn alternate() -> Strategy {
         Strategy {
             id: StrategyId::Alternate,

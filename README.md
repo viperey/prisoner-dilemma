@@ -21,7 +21,6 @@ Disclaimer: project mainly used to learning Rust language and play around this b
 
 - https://github.com/Axelrod-Python/Axelrod/blob/dev/axelrod/strategies/_strategies.py
 - **mem2**: Complex strategy shifting between all_d, tit_for_tat, and tf2t based on recent outcomes and pays attention to memory, adjusting strategy accordingly.
-- Imperfect TFT (ImpTFT)
 - Omega Tit for Tat (ΩTFT)
 - Discriminating Altruist (DA)
 - n-Pavlov

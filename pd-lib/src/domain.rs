@@ -43,6 +43,7 @@ pub enum StrategyId {
     Prober,
     AlmostAlwaysCooperate,
     AlmostAlwaysDefect,
+    AlmostAlwaysTitForTat,
     GenerousTitForTat,
 }
 
