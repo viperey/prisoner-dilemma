@@ -1,23 +1,20 @@
 # Prisoner's Dilemma
 
 Rust implementation of the Prisoner's Dilemma.
-Inspired by [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
+Inspired by the amazing [Veritasium's video](https://www.youtube.com/watch?v=mScpHTIi-kM).
   
 Disclaimer: project mainly used to learning Rust language and play around this beautiful problem. Library not mature for production use (yet?).
 
-## TODO
+## What's missing?
 
-- [ ] StrategyGradual (fix)
 - [ ] Add every known strategies, along with their tests.
-- [ ] Make sure the lib actually has library structure/release.
 - [ ] Make a GUI/Cli. Something to allow to play with it.
-
-## Experiments
-
 - [ ] Constant data. Pure constant data. Even if that implies lifetime annotations. Walk that mille.
+- [ ] Generate populations. Deterministic.
+- [ ] Game of life alike simulation. Meaning: make the prisoners play aginst the neighbors.
 
 
-## Pending Strategies
+## Strategies to add
 
 - https://github.com/Axelrod-Python/Axelrod/blob/dev/axelrod/strategies/_strategies.py
 - **mem2**: Complex strategy shifting between all_d, tit_for_tat, and tf2t based on recent outcomes and pays attention to memory, adjusting strategy accordingly.
