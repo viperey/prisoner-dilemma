@@ -1,31 +1,12 @@
 use crate::domain::{Prisoner, StrategyId};
 use crate::prisoner::PrisonerBuilder;
 use crate::tournament::TournamentResult;
-use either::*;
 use log::{debug, info};
 use std::collections::HashMap;
 
 pub struct GenerationHandler;
 impl GenerationHandler {
-    pub fn generate(generation_seed: Either<i32, (TournamentResult, i32)>) -> Vec<Prisoner> {
-        match generation_seed {
-            Left(population_size) => Self::generate_population_for_size(population_size),
-            Right((tournament_result, num_generation)) => {
-                Self::generate_population_for_tournament(tournament_result, num_generation)
-            }
-        }
-    }
-
-    fn generate_population_for_size(population_size: i32) -> Vec<Prisoner> {
-        (0..population_size)
-            .flat_map(|_| PrisonerBuilder::_all())
-            .collect()
-    }
-
-    fn generate_population_for_tournament(
-        tournament_result: TournamentResult,
-        num_generation: i32,
-    ) -> Vec<Prisoner> {
+    pub fn generate(tournament_result: TournamentResult, num_generation: i32) -> Vec<Prisoner> {
         let tournament_total_points: usize = tournament_result.tournament_scores.values().sum();
         let tournament_total_population: usize = tournament_result.tournament_scores.len();
 
@@ -68,6 +49,7 @@ impl GenerationHandler {
     fn print_summary(num_generation: i32, result: TournamentResult, next_generation: &[Prisoner]) {
         let current_population = result.get_population_type_count();
 
+        info!("");
         info!(
             "Generation #{}. {} surviving strategies",
             num_generation + 1,

@@ -1,4 +1,4 @@
-use crate::domain::Prisoner;
+use crate::domain::{Attitude, Prisoner};
 use crate::strategy::StrategyBuilder;
 use uuid::Uuid;
 
@@ -45,6 +45,13 @@ impl PrisonerBuilder {
             PrisonerBuilder::tit_for_tat(),
             PrisonerBuilder::two_tits_for_tat(),
         ]
+    }
+
+    pub fn deterministic() -> Vec<Prisoner> {
+        Self::_all()
+            .into_iter()
+            .filter(|p| p.strategy.attitude != Attitude::Chaos)
+            .collect()
     }
 
     pub fn almost_always_cooperate() -> Prisoner {

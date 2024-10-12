@@ -1,6 +1,17 @@
 use uuid::Uuid;
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+/// How's this strategy going to behave?
+#[derive(Debug, Eq, PartialEq, Clone, Hash)]
+pub enum Attitude {
+    /// Never defects first. As analyzed & defined by original Thesis' definition.
+    Nice,
+    /// Non-deterministic cases. Can't tell if it's going to cooperate or defect first.
+    Chaos,
+    /// Will defect even on the absence of opponent's defection.
+    Evil,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Hash)]
 pub enum Move {
     Cooperate,
     Defect,
@@ -34,6 +45,7 @@ pub enum StrategyId {
     HardMajo,
     HardTitForTat,
     Mistrust,
+    OmegaTitForTat,
     Pavlovian,
     PerCCD,
     PerDDC,
@@ -53,7 +65,7 @@ pub struct Strategy {
     pub id: StrategyId,
     pub name: String,
     pub description: String,
-    pub is_nice: bool,
+    pub attitude: Attitude,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]

@@ -14,6 +14,7 @@ mod grim_trigger;
 mod hard_majo;
 mod hard_tit_for_tat;
 mod mistrust;
+mod omega_tit_for_tat;
 mod pavlovian;
 mod per_ccd;
 mod per_ddc;
@@ -45,6 +46,7 @@ use crate::strategies::grim_trigger::StrategyGrimTrigger;
 use crate::strategies::hard_majo::StrategyHardMajo;
 use crate::strategies::hard_tit_for_tat::StrategyHardTitForTat;
 use crate::strategies::mistrust::StrategyMistrust;
+use crate::strategies::omega_tit_for_tat::StrategyOmegaTitForTat;
 use crate::strategies::pavlovian::StrategyPavlovian;
 use crate::strategies::per_ccd::StrategyPerCCD;
 use crate::strategies::per_ddc::StrategyPerDDC;
@@ -95,6 +97,7 @@ impl StrategyBehaviorFacade {
             StrategyId::HardMajo => StrategyHardMajo::decide(pgr),
             StrategyId::HardTitForTat => StrategyHardTitForTat::decide(pgr),
             StrategyId::Mistrust => StrategyMistrust::decide(pgr),
+            StrategyId::OmegaTitForTat => StrategyOmegaTitForTat::decide(pgr),
             StrategyId::Pavlovian => StrategyPavlovian::decide(pgr),
             StrategyId::PerCCD => StrategyPerCCD::decide(pgr),
             StrategyId::PerDDC => StrategyPerDDC::decide(pgr),
